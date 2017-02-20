@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Binding</string>
+    <string name="orange">I have %d orange.</string>
+</resources>

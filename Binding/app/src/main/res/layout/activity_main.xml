@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data android:class="Vinit">
+
+        <import type="android.view.View" />
+
+        <import type="java.util.List" />
+
+        <import type="com.mds.binding.User" />
+
+        <variable
+            name="user"
+            type="com.mds.binding.User" />
+
+        <variable
+            name="ouser"
+            type="com.mds.binding.ObservableUser" />
+
+        <variable
+            name="methodreferencehandler"
+            type="com.mds.binding.MethodReferenceHandler" />
+
+        <variable
+            name="eventHandler"
+            type="com.mds.binding.____ListenerBindingEventHandler" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
+
+        <variable
+            name="list"
+            type="List&lt;User&gt;" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context="com.mds.binding.MainActivity">
+
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{user.name}"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/name_l_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{user.myUserDetails.name}"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{user.age}" />
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{methodreferencehandler::onClickViaMethodReferenceHandler}"
+                android:text="Method Reference" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->  eventHandler.eventHandlerViaListenerBinding() }"
+                android:text="Normal Listener Binding" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()-> view.getVisibility() == View.VISIBLE ? eventHandler.eventHandlerViaListenerBinding(true) : eventHandler.eventHandlerViaListenerBinding(false)}"
+                android:text="Complex Listener Binding" />
+
+            <include
+                layout="@layout/view_sample"
+                bind:user="@{user}" />
+
+            <Button
+                android:id="@+id/c_b_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{methodreferencehandler::onClickViaMethodReferenceHandler}"
+                android:text="Customize Binder name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Null Coalescing operator" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@{user.name ?? user.age}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="List Item Binding" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@{list[0].getName()}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Resource Item Binding" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@{@string/orange(2)}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@{@string/app_name}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Observable Object (click on the name and see the effect.)" />
+
+
+            <TextView
+                android:id="@+id/notify_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{methodreferencehandler::onClickViaMethodReferenceHandler}"
+                android:padding="16dp"
+                android:text="@{ouser.name}" />
+        </LinearLayout>
+    </ScrollView>
+
+</layout>
